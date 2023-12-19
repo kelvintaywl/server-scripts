@@ -12,14 +12,17 @@ spec:
       selector:
       - layer=application
       name: application
+      namespace: dummy
   - logs:
       selector:
       - layer=data
       name: data
+      namespace: dummy
   - logs:
       selector:
       - layer=execution
       name: nomad
+      namespace: dummy
   - exec:
       name: nomad-status
       selector:
@@ -28,6 +31,7 @@ spec:
       command: ["/bin/sh"]
       args: ["-c","nomad node status && echo && nomad server members && echo && nomad status"]
       timeout: 10s
+      namespace: dummy
   - exec:
       name: rabbitmq-list-queues
       selector:
@@ -35,6 +39,7 @@ spec:
       command: ["/bin/sh"]
       args: ["-c","rabbitmqctl list_queues"]
       timeout: 10s
+      namespace: dummy
   - exec:
       name: pvc-postgres
       selector:
@@ -42,6 +47,7 @@ spec:
       command: ["/bin/sh"]
       args: ["-c","df -h /bitnami/postgresql"]
       timeout: 10s
+      namespace: dummy
   - exec:
       name: pvc-mongodb
       selector:
@@ -49,6 +55,7 @@ spec:
       command: ["/bin/sh"]
       args: ["-c","df -h /bitnami/mongodb"]
       timeout: 10s
+      namespace: dummy
   - exec:
       name: pvc-vault
       selector:
@@ -56,6 +63,7 @@ spec:
       command: ["/bin/sh"]
       args: ["-c","df -h /vault/file"]
       timeout: 10s
+      namespace: dummy
   - exec:
       name: pvc-redis
       selector:
@@ -63,6 +71,7 @@ spec:
       command: ["/bin/sh"]
       args: ["-c","df -h /data"]
       timeout: 10s
+      namespace: dummy
   - exec:
       name: pvc-rabbitmq
       selector:
@@ -70,6 +79,7 @@ spec:
       command: ["/bin/sh"]
       args: ["-c","df -h /bitnami/rabbitmq/mnesia"]
       timeout: 10s
+      namespace: dummy
   redactors:
   - name: Redact Object storage credentials
     fileSelector:
