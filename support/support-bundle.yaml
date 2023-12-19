@@ -5,7 +5,9 @@ metadata:
 spec:
   collectors:
   - clusterInfo: {}
-  - clusterResources: {}
+  - clusterResources:
+      namespaces:
+        - circleci
   - logs:
       selector:
       - layer=application
