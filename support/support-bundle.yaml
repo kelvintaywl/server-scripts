@@ -7,7 +7,7 @@ spec:
   - clusterInfo: {}
   - clusterResources:
       namespaces:
-        - circleci
+        - dummy
   - logs:
       selector:
       - layer=application
