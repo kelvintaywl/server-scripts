@@ -27,6 +27,15 @@ spec:
       args: ["-c","nomad node status && echo && nomad server members && echo && nomad status"]
       timeout: 10s
   - exec:
+      name: nomad-job-logs
+      selector:
+        - app=nomad-server
+        - layer=execution
+      command: ["/bin/sh"]
+      args: ["-c","nomad status | tail -n +2 | awk '{ print $1 }' | while read -r job; do echo '\njob =' $job && nomad status $job && nomad logs -job -stderr $job && echo '\n'; done"]
+      # max 20s, see https://troubleshoot.sh/docs/collect/exec/#timeout-optional
+      timeout: 20s
+  - exec:
       name: rabbitmq-list-queues
       selector:
         - app.kubernetes.io/name=rabbitmq
